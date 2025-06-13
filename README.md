@@ -11,7 +11,7 @@ According to Google:
 
 In this project, we use Apps Script to work directly with Excel files stored in your Google Drive.  
 
-Whether you want to integrate this tool into your workflow, understand the logic behind it, or explore how it was built — you're in the right place!
+Whether you want to integrate this tool into your workflow, understand the logic behind it, or explore how it was built you're in the right place!
 
 ## 💡 Why Use This?
 
@@ -22,12 +22,12 @@ Whether you want to integrate this tool into your workflow, understand the logic
 
 ## 📁 Tech Stack
 
-- **Google Apps Script** – for backend logic and integration with Google Sheets.
-- **HTML + CSS** – for building the filtering form and UI.
+- **Google Apps Script** for backend logic and integration with Google Sheets.
+- **HTML + CSS** for building the filtering form and UI.
 
 ## 🔍 The Logic Behind It
 
-Before jumping into code, we need to understand the real problem — and why it matters.
+Before jumping into code, we need to understand the real problem and why it matters.
 
 Filtering data in large spreadsheets can be:
 - **Confusing** for non-technical team members.
@@ -35,14 +35,14 @@ Filtering data in large spreadsheets can be:
 - **A productivity bottleneck**, which ultimately means **lost time, money, and focus**.
 
 If your team frequently works with large `.xlsx` files, applying filters manually becomes inefficient.  
-This tool simplifies the filtering process through a guided form, allowing users to focus on what matters most — the **results**.
+This tool simplifies the filtering process through a guided form, allowing users to focus on what matters most the **results**.
 
 Picture your sheet as a grid, with **rows** (X) and **columns** (Y).  
 Each column has a header, which we can use as its index — this lets us identify and retrieve the values we need with mathematical precision.
 
 But how do we implement this?
 
-Simple — first we create two constants that will enable us to access our data:
+Simple first we create two constants that will enable us to access our data:
 
 ```javascript
 const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -79,14 +79,14 @@ We need to enable users to filter this data. We have a few options:
 >- size
 >- gender
 
-Instead of adding another sheet with filter criteria, we chose Option 2 — a custom HTML form:
+Instead of adding another sheet with filter criteria, we chose Option 2 a custom HTML form:
 
 ```javascript
 const filters = getData(data);
 const columns = readSheet(headers);
 const filtered = apply(products, columns, filters);
 ```
-Here’s getData — a function from our script:
+Here’s getData a function from our script:
 
 ```javascript
 // Retrieve filter values from the HTML form
