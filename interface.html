@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+      }
+
+      .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 80%;
+        max-width: 600px;
+      }
+
+      input, select, button {
+        padding: 10px;
+        font-size: 16px;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Filter Products</h2>
+      <form id="filterForm">
+        <input type="number" id="minPrice" placeholder="Minimum Price">
+        <input type="number" id="maxPrice" placeholder="Maximum Price">
+        <input type="text" id="color" placeholder="Color">
+        <input type="text" id="size" placeholder="Size">
+        <input type="text" id="gender" placeholder="Gender">
+        <button type="submit">Apply Filters</button>
+      </form>
+    </div>
+
+    <script>
+      document.getElementById("filterForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const data = {
+          minPrice: document.getElementById("minPrice").value,
+          maxPrice: document.getElementById("maxPrice").value,
+          color: document.getElementById("color").value,
+          size: document.getElementById("size").value,
+          gender: document.getElementById("gender").value,
+        };
+        google.script.run
+          .withSuccessHandler(() => google.script.host.close())
+          .filterProducts(data);
+      });
+    </script>
+  </body>
+</html>
