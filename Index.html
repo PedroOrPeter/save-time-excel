@@ -1,0 +1,118 @@
+  <!DOCTYPE html>
+  <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <base target="_top">
+    <title>Filtro de produtos</title>
+    <style>
+      body {
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+        background: #fce4ff;
+      }
+      form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+        margin-bottom: 20px;
+        max-width: 320px;
+      }
+      form input, form select {
+        padding: 8px 12px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: #fff;
+        margin-bottom: 12px;
+        width: 100%;
+      }
+      form button {
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        background: #8a4fff;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      form button:hover {
+        background: #7a3fee;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      }
+      table th, table td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+      }
+      table th {
+        background: #f5f5f5;
+      }
+    </style>
+  </head>
+  <body>
+  <h2>Filtro de produtos</h2>
+
+  <form id="filterForm">
+    <input id="minPrice" type="number" placeholder="Valor mínimo">
+    <input id="maxPrice" type="number" placeholder="Valor máximo">
+    <input id="color" type="text" placeholder="Cor">
+    <input id="size" type="text" placeholder="Tamanho">
+    <input id="gender" type="text" placeholder="Gênero">
+    <button>Filtrar</button>
+  </form>
+
+  <h3>Dados Filtrados</h3>
+  <table id="resultsTable">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    document.getElementById("filterForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      var data = {
+        minPrice: document.getElementById("minPrice").value,
+        maxPrice: document.getElementById("maxPrice").value,
+        color: document.getElementById("color").value,
+        size: document.getElementById("size").value,
+        gender: document.getElementById("gender").value
+      };
+      google.script.run.withSuccessHandler(function (resp) {
+        if (resp.error) {
+          alert("Erro: " + resp.error);
+          return;
+        }
+        renderTable(resp.headers, resp.products);
+      }).filterProducts(data);
+    });
+
+    function renderTable(headers, products) {
+      var tbody = document.querySelector("#resultsTable tbody");
+
+      tbody.innerHTML = "";
+      var thead = document.querySelector("#resultsTable thead");
+
+      thead.innerHTML = "<tr>" + headers.map(function (item) {
+        return "<th>" + item + "</th>";
+      }).join("") + "</tr>";
+
+      products.forEach(function (item) {
+        tbody.innerHTML += "<tr>" + item.map(function (valor) {
+          return "<td>" + valor + "</td>";
+        }).join("") + "</tr>";
+      });
+    }
+  </script>
+
+  </body>
+  </html>
