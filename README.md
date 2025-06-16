@@ -152,22 +152,11 @@ Now we create the "Results" sheet and populate it with the filter results
 
 ## Extra!
 
-To create a interface, use this!
+This function handles GET requests from the web app, allowing users to view it through a link
 ```javascript
-// This function builds a UI to make it easier for the user to filter products
-function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu('Products Filter')
-    .addItem('Open interface', 'showFullScreenInterface')
-    .addToUi();
-}
 
-// This function opens the interface in a modal dialog with almost full-screen dimensions
-function showFullScreenInterface() {
-  var html = HtmlService.createHtmlOutputFromFile('interface.html')
-      .setWidth(1000)
-      .setHeight(600);
-  SpreadsheetApp.getUi().showModalDialog(html, 'Product Filter');
+function doGet(e) {
+  return HtmlService.createHtmlOutputFromFile('Index');  
 }
 ```
 
