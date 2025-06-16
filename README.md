@@ -171,9 +171,18 @@ function showFullScreenInterface() {
 }
 ```
 
+👨‍💻 How to Use Interface
 
-## 👨‍💻 How to Use
+1️⃣ Use this link:
 
-Coming soon...
+APP URL: https://script.google.com/macros/s/AKfycbzZ9Ct0KBaMeaH59LdO47nx-pe14ChQRIDdX3Btv9JliAgM4IqodgjUBEb9JB2mUPDVXA/exec
+Code: AKfycbzZ9Ct0KBaMeaH59LdO47nx-pe14ChQRIDdX3Btv9JliAgM4IqodgjUBEb9JB2mUPDVXA
+Excel File URL: https://docs.google.com/spreadsheets/d/12MNsZ75770WujD9fvctKwuUTS-8DzyQvUx1e7BXLhNg/edit?usp=drive_link
+
+2️⃣ Fill in the inputs.
+
+3️⃣ Check the results in the Excel file.
+
+4️⃣ You can also view the results directly on the webpage as an HTML table.
 
 ---
