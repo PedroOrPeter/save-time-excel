@@ -1,5 +1,21 @@
 # Save-Time Excel
 
+## 📚 Sumário
+
+- [🚀 What is Google Apps Script?](#-what-is-google-apps-script)
+- [💡 Why Use This?](#-why-use-this)
+- [🔍 The Logic Behind It](#-the-logic-behind-it)
+- [👨‍💻 How to Use Interface](#-how-to-use-interface)
+- [🔹 Extra](#extra)
+
+
+## ⚡ Pré-requisitos
+
+- Uma conta **Google**.
+- Uma planilha no **Google Drive** denominada `Products`.
+- A planilha deve possuir as colunas: `SALE_PRICE, COLOR, SIZE, GENDER`.
+- A **URL** do script implantado.
+
 This repository provides a simple and effective solution to help your team filter `.xlsx` files efficiently.  
 It leverages **Google Apps Script**, along with **HTML** and **CSS**, to create a lightweight, web-based interface for filtering Excel data directly from your Google Drive.
 
@@ -42,28 +58,29 @@ Each column has a header, which we can use as its index — this lets us identif
 
 But how do we implement this?
 
-Simple first we create two constants that will enable us to access our data:
-
+First, we retrieve the data from our sheet:
 ```javascript
-const ss = SpreadsheetApp.getActiveSpreadsheet();
-const sheetProducts = ss.getSheetByName("Products");
+function getProducts() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("Products");
+
+  if (!sheet) {
+    throw new Error("Base sheet does not exist.");
+  }
+
+  var fullData = sheet.getDataRange().getValues();
+  var headers = fullData[0];
+  var products = fullData.slice(1);
+
+  return {
+    headers: headers,
+    products: products
+  };
+}
 ```
-
-getDataRange and getValues will save the values in our fullData const. 
-The values from headers will be our first line
-Products = fullData.slice(1) will be everything from second line to max number of lines
-
-```javascript
-const fullData = sheetProducts.getDataRange().getValues();
-const headers = fullData[0];
-const products = fullData.slice(1);
-```
-
----
-
 Here:
-- getDataRange() grabs the range of cells with data.
-- getValues() converts them into a 2D array.
+>- getDataRange() grabs the range of cells with data.
+>- getValues() converts them into a 2D array.
 
 The first row (fullData[0]) contains the column headers.
 The rest (fullData.slice(1)) contains the actual data.
@@ -82,85 +99,102 @@ We need to enable users to filter this data. We have a few options:
 Instead of adding another sheet with filter criteria, we chose Option 2 a custom HTML form:
 
 ```javascript
-const filters = getData(data);
-const columns = readSheet(headers);
-const filtered = apply(products, columns, filters);
-```
-Here’s getData a function from our script:
+function filterProductsList(products, headers, filter) {
+  // Get column indices
+  var idxPrice = headers.indexOf("SALE_PRICE");
+  var idxColor = headers.indexOf("COLOR");
+  var idxSize = headers.indexOf("SIZE");
+  var idxGender = headers.indexOf("GENDER");
 
-```javascript
-// Retrieve filter values from the HTML form
-function getData(data) {
-  const minPrice = parseFloat(data.minPrice) || 0;
-  const maxPrice = parseFloat(data.maxPrice) || Number.MAX_VALUE;
-  const color = (data.color || "").toString().toLowerCase();
-  const size = (data.size || "").toString().toLowerCase();
-  const gender = (data.gender || "").toString().toLowerCase();
+  // Parse filter values with defaults
+  var minPrice = parseFloat(filter.minPrice) || 0;
+  var maxPrice = parseFloat(filter.maxPrice) || Number.MAX_VALUE;
+  var color = (filter.color || '').toString().toLowerCase().trim();
+  var size = (filter.size || '').toString().toLowerCase().trim();
+  var gender = (filter.gender || '').toString().toLowerCase().trim();
 
-  return { minPrice, maxPrice, color, size, gender };
-}
-```
-
-Now readSheet(headers) will retrieve the index from each of our Headers:
-```javascript
-function readSheet(headers) {
-  const idPrice = headers.indexOf("SALE_PRICE");
-  const idColor = headers.indexOf("COLOR");
-  const idSize = headers.indexOf("SIZE");
-  const idGender = headers.indexOf("GENDER");
-
-  return { idPrice, idColor, idSize, idGender };
-}
-```
-
-The apply function expects 3 parameters:
-- Products
-- Columns
-- Filters
-
- It then applies filter criteria (min and max price, color, size, and gender) and returns the matching products
- ```javascript
-// Apply filters from the user's filter form. This function contains filtering logic, but it's easy to follow.
-function apply(products, columns, filters) {
-  return products.filter(prod => {
-    const price = parseFloat(prod[columns.idPrice]);
-    const productColor = prod[columns.idColor].toString().toLowerCase();
-    const productSize = prod[columns.idSize].toString().toLowerCase();
-    const productGender = prod[columns.idGender].toString().toLowerCase();
+  // Filter products based on criteria
+  return products.filter(function (prod) {
+    var price = parseFloat(prod[idxPrice]) || 0;
+    var productColor = prod[idxColor].toString().toLowerCase().trim();
+    var productSize = prod[idxSize].toString().toLowerCase().trim();
+    var productGender = prod[idxGender].toString().toLowerCase().trim();
 
     return (
-      price >= filters.minPrice &&
-      price <= filters.maxPrice &&
-      (filters.color === "" || productColor === filters.color) &&
-      (filters.size === "" || productSize === filters.size) &&
-      (filters.gender === "" || productGender === filters.gender)
+      price >= minPrice &&
+      price <= maxPrice &&
+      (color === '' || productColor === color) &&
+      (size === '' || productSize === size) &&
+      (gender === '' || productGender === gender)
     );
   });
 }
+
 ```
-Now we create the "Results" sheet and populate it with the filter results
+Filtering products:
 ```javascript
- const lastSheet = ss.getSheetByName("Results");
-  if (lastSheet) ss.deleteSheet(lastSheet);
+function filterProducts(data) {
+  // Get all products data
+  var result = getProducts();
+  var headers = result.headers;
+  var products = result.products;
 
-  const resultsSheet = ss.insertSheet("Results");
-  resultsSheet.appendRow(headers);
-  filtered.forEach(row => resultsSheet.appendRow(row)); 
+  // Filter products and create new sheet
+  var filtered = filterProductsList(products, headers, data);
+  var newSheetName = createFilteredSheet(filtered, headers);
 
-  SpreadsheetApp.getUi().alert("Done! You can see the results in you sheet 'Results'!");
+  return {
+    message: "Data successfully filtered!",
+    newSheetName: newSheetName,
+    products: filtered,
+    headers: headers
+  };
+}
+
 ```
 
+Finally, we create a new sheet to show the results:
+```javascript
+function createFilteredSheet(filteredProducts, headers) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  // Create sheet with timestamp in name
+  var newSheetName = "Filtered " + new Date().toLocaleString("en-US");
+
+  var newSheet = ss.insertSheet(newSheetName);
+
+  // Add headers and data
+  newSheet.appendRow(headers);
+  filteredProducts.forEach(function (item) {
+    newSheet.appendRow(item);
+  });
+
+  return newSheetName;
+}
+```
+
+After the script runs, it displays a message stating that everything was successfully processed:
+ ```javascript
+return {
+  message: "Data successfully filtered!",
+  newSheetName: newSheetName,
+  products: filtered,
+  headers: headers
+};
+
+// The user can then view the results in the new sheet or in the html web app table.
+```
+---
 ## Extra!
 
 This function handles GET requests from the web app, allowing users to view it through a link
 ```javascript
-
 function doGet(e) {
   return HtmlService.createHtmlOutputFromFile('Index');  
 }
 ```
-
-👨‍💻 How to Use Interface
+---
+## 👨‍💻 How to Use Interface
 
 1️⃣ Use this link:
 
@@ -175,3 +209,9 @@ Excel File URL: https://docs.google.com/spreadsheets/d/12MNsZ75770WujD9fvctKwuUT
 4️⃣ You can also view the results directly on the webpage as an HTML table.
 
 ---
+## 🖼 Exemplo
+
+![Screen showing the interface + filtering](./evidencia.png)
+![Screen showing the Excel sheet + filtering](./evidencia2.png)
+
+
