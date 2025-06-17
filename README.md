@@ -1,6 +1,6 @@
 # Save-Time Excel
 
-## 📚 Sumário
+## 📚 Table of Contents
 
 - [🚀 What is Google Apps Script?](#-what-is-google-apps-script)
 - [💡 Why Use This?](#-why-use-this)
@@ -209,7 +209,7 @@ Excel File URL: https://docs.google.com/spreadsheets/d/12MNsZ75770WujD9fvctKwuUT
 4️⃣ You can also view the results directly on the webpage as an HTML table.
 
 ---
-## 🖼 Exemplo
+## 🖼 Example
 
 ![Screen showing the interface + filtering](./evidencia.png)
 ![Screen showing the Excel sheet + filtering](./evidencia2.png)
