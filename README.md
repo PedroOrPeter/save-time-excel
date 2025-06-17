@@ -198,9 +198,9 @@ function doGet(e) {
 
 1️⃣ Use this link:
 
-APP URL: https://script.google.com/macros/s/AKfycbypZklv0xgfiBP6dv6wOLRYcIfocZlgutUog7D28OmtnoKRvExjsR1i3A5IKU6t0x7SGQ/exec
-Code: AKfycbypZklv0xgfiBP6dv6wOLRYcIfocZlgutUog7D28OmtnoKRvExjsR1i3A5IKU6t0x7SGQ
-Excel File URL: https://docs.google.com/spreadsheets/d/12MNsZ75770WujD9fvctKwuUTS-8DzyQvUx1e7BXLhNg/edit?usp=drive_link
+- APP URL: https://script.google.com/macros/s/AKfycbypZklv0xgfiBP6dv6wOLRYcIfocZlgutUog7D28OmtnoKRvExjsR1i3A5IKU6t0x7SGQ/exec
+- Code: AKfycbypZklv0xgfiBP6dv6wOLRYcIfocZlgutUog7D28OmtnoKRvExjsR1i3A5IKU6t0x7SGQ
+- Excel File URL: https://docs.google.com/spreadsheets/d/12MNsZ75770WujD9fvctKwuUTS-8DzyQvUx1e7BXLhNg/edit?usp=drive_link
 
 2️⃣ Fill in the inputs.
 
