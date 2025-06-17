@@ -11,10 +11,10 @@
 
 ## ⚡ Prerequisites
 
-- A Google account.
-- A Google Drive spreadsheet named Products.
-- The spreadsheet must contain the following columns: SALE_PRICE, COLOR, SIZE, GENDER.
-- The URL of the deployed script.
+>- A Google account.
+>- A Google Drive spreadsheet named Products.
+>- The spreadsheet must contain the following columns: SALE_PRICE, COLOR, SIZE, GENDER.
+>- The URL of the deployed script.
 
 This repository provides a simple and effective solution to help your team filter `.xlsx` files efficiently.  
 It leverages **Google Apps Script**, along with **HTML** and **CSS**, to create a lightweight, web-based interface for filtering Excel data directly from your Google Drive.
@@ -31,24 +31,24 @@ Whether you want to integrate this tool into your workflow, understand the logic
 
 ## 💡 Why Use This?
 
-- No need for complex Excel formulas.
-- Simple and user-friendly web interface.
-- Easily customizable for different filtering needs.
-- Fast deployment inside your Google Workspace.
+>- No need for complex Excel formulas.
+>- Simple and user-friendly web interface.
+>- Easily customizable for different filtering needs.
+>- Fast deployment inside your Google Workspace.
 
 ## 📁 Tech Stack
 
-- **Google Apps Script** for backend logic and integration with Google Sheets.
-- **HTML + CSS** for building the filtering form and UI.
+>- **Google Apps Script** for backend logic and integration with Google Sheets.
+>- **HTML + CSS** for building the filtering form and UI.
 
 ## 🔍 The Logic Behind It
 
 Before jumping into code, we need to understand the real problem and why it matters.
 
 Filtering data in large spreadsheets can be:
-- **Confusing** for non-technical team members.
-- **Time-consuming**, especially when dealing with complex formulas.
-- **A productivity bottleneck**, which ultimately means **lost time, money, and focus**.
+>- **Confusing** for non-technical team members.
+>- **Time-consuming**, especially when dealing with complex formulas.
+>- **A productivity bottleneck**, which ultimately means **lost time, money, and focus**.
 
 If your team frequently works with large `.xlsx` files, applying filters manually becomes inefficient.  
 This tool simplifies the filtering process through a guided form, allowing users to focus on what matters most the **results**.
