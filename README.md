@@ -9,12 +9,12 @@
 - [🔹 Extra](#extra)
 
 
-## ⚡ Pré-requisitos
+## ⚡ Prerequisites
 
-- Uma conta **Google**.
-- Uma planilha no **Google Drive** denominada `Products`.
-- A planilha deve possuir as colunas: `SALE_PRICE, COLOR, SIZE, GENDER`.
-- A **URL** do script implantado.
+- A Google account.
+- A Google Drive spreadsheet named Products.
+- The spreadsheet must contain the following columns: SALE_PRICE, COLOR, SIZE, GENDER.
+- The URL of the deployed script.
 
 This repository provides a simple and effective solution to help your team filter `.xlsx` files efficiently.  
 It leverages **Google Apps Script**, along with **HTML** and **CSS**, to create a lightweight, web-based interface for filtering Excel data directly from your Google Drive.
