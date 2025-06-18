@@ -1,4 +1,7 @@
-# Save-Time Excel
+# 📊 Save-Time Product Filter for Excel via Google Apps Script
+
+> 📎 Web App: [Launch Interface](https://script.google.com/macros/s/AKfycbypZklv0xgfiBP6dv6wOLRYcIfocZlgutUog7D28OmtnoKRvExjsR1i3A5IKU6t0x7SGQ/exec)  
+> 📎 Spreadsheet: [Open Products Sheet](https://docs.google.com/spreadsheets/d/12MNsZ75770WujD9fvctKwuUTS-8DzyQvUx1e7BXLhNg/edit?usp=drive_link)
 
 ## 📚 Table of Contents
 
@@ -53,7 +56,7 @@ Filtering data in large spreadsheets can be:
 >- **A productivity bottleneck**, which ultimately means **lost time, money, and focus**.
 
 If your team frequently works with large `.xlsx` files, applying filters manually becomes inefficient.  
-This tool simplifies the filtering process through a guided form, allowing users to focus on what matters most the **results**.
+This tool simplifies the filtering process through a guided form, allowing users to focus on what matters most: the **results**.
 
 Picture your sheet as a grid, with **rows** (X) and **columns** (Y).  
 Each column has a header, which we can use as its index — this lets us identify and retrieve the values we need with mathematical precision.
@@ -187,7 +190,7 @@ return {
 // The user can then view the results in the new sheet or in the html web app table.
 ```
 ---
-## Extra!
+## 🌐 Web App Setup (Extra Info)
 
 This function handles GET requests from the web app, allowing users to view it through a link
 ```javascript
@@ -224,10 +227,9 @@ If you want to **add new filters** (for example: `BRAND`, `MATERIAL`, etc.), fol
 ## 👨‍💻 How to Use Interface
 
 1️⃣ Use this link:
-
->- APP URL: https://script.google.com/macros/s/AKfycbypZklv0xgfiBP6dv6wOLRYcIfocZlgutUog7D28OmtnoKRvExjsR1i3A5IKU6t0x7SGQ/exec
+> 📎 Web App: [Launch Interface](https://script.google.com/macros/s/AKfycbypZklv0xgfiBP6dv6wOLRYcIfocZlgutUog7D28OmtnoKRvExjsR1i3A5IKU6t0x7SGQ/exec)  
+> 📎 Spreadsheet: [Open Products Sheet](https://docs.google.com/spreadsheets/d/12MNsZ75770WujD9fvctKwuUTS-8DzyQvUx1e7BXLhNg/edit?usp=drive_link)
 >- Code: AKfycbypZklv0xgfiBP6dv6wOLRYcIfocZlgutUog7D28OmtnoKRvExjsR1i3A5IKU6t0x7SGQ
->- Excel File URL: https://docs.google.com/spreadsheets/d/12MNsZ75770WujD9fvctKwuUTS-8DzyQvUx1e7BXLhNg/edit?usp=drive_link
 
 2️⃣ Fill in the inputs.
 
