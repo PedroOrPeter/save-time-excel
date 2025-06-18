@@ -7,6 +7,8 @@
 - [🔍 The Logic Behind It](#-the-logic-behind-it)
 - [👨‍💻 How to Use Interface](#-how-to-use-interface)
 - [🔹 Extra](#extra)
+- [📦 Example](#example)
+- [🛠️ Maintenance](#️maintenance)
 
 
 ## ⚡ Prerequisites
@@ -193,6 +195,31 @@ function doGet(e) {
   return HtmlService.createHtmlOutputFromFile('Index');  
 }
 ```
+---
+## 🛠️ Maintenance
+
+To keep this tool working and adaptable to your evolving data, here are some maintenance guidelines:
+
+### 📑 Spreadsheet Structure
+- Make sure the sheet is named `Products` and contains the expected columns like:
+  - `SALE_PRICE`, `COLOR`, `SIZE`, `GENDER`
+- Do not reorder or rename these columns unless you also update the script.
+
+### ⚙️ Updating Filters
+If you want to **add new filters** (for example: `BRAND`, `MATERIAL`, etc.), follow these steps:
+
+1. **Add the column** to the `Products` sheet.
+2. **Update the HTML form** (`Index.html`) to include a new `<input>` or `<select>` field.
+3. **Update the JavaScript block** in `Index.html` to include the new field in the `data` object passed to `google.script.run.filterProducts(data)`.
+4. **Update `filterProductsList()`** in `Code.gs` to:
+   - Capture the new column index using `headers.indexOf(...)`.
+   - Parse and apply the new filter condition.
+5. Done! The new filter will be applied both in the UI and in the spreadsheet.
+
+### 🧹 General Tips
+- Periodically clean old "Filtered" sheets to avoid clutter.
+- If filters do not work, ensure column headers in your sheet match those used in your script.
+
 ---
 ## 👨‍💻 How to Use Interface
 
